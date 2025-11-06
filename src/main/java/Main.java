@@ -1,10 +1,8 @@
-import connect.ConnectionToBase;
 import qr.QrProgram;
 import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        new ConnectionToBase().connection();
-        System.out.println(new QrProgram().qrTouch(48));
+        System.out.println(new QrProgram().qrTouch("6fc840e3-a8d3-44bf-823c-f3b901b5326d"));
     }
 }

@@ -3,15 +3,17 @@ package qr;
 import process.User;
 import process.UserOperations;
 import java.sql.SQLException;
+import java.util.UUID;
 
 public class QrProgram {
-
-    public String qrTouch(int uuid) throws SQLException {
+    public String qrTouch(String uuid) throws SQLException {
+        UUID uuidUser = UUID.fromString(uuid);
         UserOperations userOperations = new UserOperations();
-        User selectUser = userOperations.select(uuid);
-        if (userOperations.delete(uuid) > 0) {
-            userOperations.insert(selectUser.getSurname(), selectUser.getFirstName(), selectUser.getPatronymic());
+        User findUser = userOperations.checkQrCode(uuidUser);
+        if (findUser != null) {
+            userOperations.updateQrCode(findUser);
+            return findUser.toString();
         }
-        return selectUser.format();
+        return "";
     }
 }
