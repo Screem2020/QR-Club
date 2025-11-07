@@ -21,13 +21,12 @@ public class UserOperations {
                 "id_uuid INTEGER NOT NULL," +
                 "CONSTRAINT fk_users_deteils " +
                 "FOREIGN KEY(id_uuid) REFERENCES users_club(id)" +
-                "ON DELETE CASCADE);";
+                " ON DELETE CASCADE);";
         try (Connection conn = ConnectionToBase.getConnection();
-             PreparedStatement statementUser = conn.prepareStatement(tableUser);
-             PreparedStatement statementUuid = conn.prepareStatement(tableUuid)) {
-            statementUuid.executeUpdate(createExtension);
-            statementUser.executeUpdate();
-            statementUuid.executeUpdate();
+             Statement statement = conn.createStatement()) {
+            statement.executeUpdate(createExtension);
+            statement.executeUpdate(tableUser);
+            statement.executeUpdate(tableUuid);
         }
     }
 
@@ -120,6 +119,7 @@ public class UserOperations {
                 String firstName = resultSet.getString("first_name");
                 String patronymic = resultSet.getString("patronymic");
                 users.add(new User(uuid, surname, firstName, patronymic));
+                resultSet.close();
             }
             return users;
         }
