@@ -1,9 +1,9 @@
-import process.UserOperations;
-import qr.QrProgram;
+import com.example.repository.UserRepository;
+import com.example.service.QrCodeService;
 import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        System.out.println(new QrProgram().qrTouch("6fc840e3-a8d3-44bf-823c-f3b901b5326d", new UserOperations()));
+        System.out.println(new QrCodeService().qrTouch("b95a570d-b6e5-4bea-bc1e-651cb6408d7a", new UserRepository()));
     }
 }

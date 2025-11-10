@@ -1,4 +1,4 @@
-package process;
+package com.example.model;
 
 import java.util.UUID;
 
